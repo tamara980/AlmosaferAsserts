@@ -1,0 +1,33 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class UseHTMLPage {
+	WebDriver driver= new ChromeDriver();
+	
+	
+	@BeforeTest
+	public void setup() {  
+		driver.get("file:///D:/VS%20Code%20projects/index.html?");
+		driver.manage().window().maximize();
+		
+	}
+	
+	@Test
+	public void tests() {
+		WebElement username = driver.findElement(By.id("tamara"));
+		WebElement password = driver.findElement(By.id("ta"));
+		WebElement telephone = driver.findElement(By.id("t"));
+		WebElement Date = driver.findElement(By.id("a"));
+		username.sendKeys("Tamara");
+		password.sendKeys("dabit");
+		telephone.sendKeys("0877");
+		Date.sendKeys("2451998");
+		
+	}
+	
+
+}

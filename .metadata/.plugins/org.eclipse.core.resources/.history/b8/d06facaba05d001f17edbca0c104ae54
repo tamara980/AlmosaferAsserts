@@ -1,0 +1,36 @@
+package homePage;
+
+import static org.testng.Assert.assertEquals;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import dev.failsafe.internal.util.Assert;
+
+public class TestCases {
+
+	WebDriver driver= new ChromeDriver();
+	String AlmosaferURL= "https://global.almosafer.com/en";
+	String ExpectedLanguage= "en";
+	
+	@BeforeTest
+	public void setup() {
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		driver.get(AlmosaferURL);
+	}
+	
+	@Test
+	public void CheckTheLanguage() {
+		WebElement language= driver.findElement(By.tagName("html"));
+		String ActualLanguage= language.getAttribute("lang");
+		org.testng.Assert.assertEquals(ActualLanguage, ExpectedLanguage);		
+		
+	}
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="Lesson5Java"/>
+			<item value="WithHTMLProjet"/>
+			<item value="Project3"/>
+			<item value="SecondProject"/>
+			<item value="FistrProjectJulyAutomation"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="Lesson5Java"/>
+			<item value="WithHTMLProjet"/>
+			<item value="Project3"/>
+			<item value="SecondProject"/>
+			<item value="FistrProjectJulyAutomation"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>
