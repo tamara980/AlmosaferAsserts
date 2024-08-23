@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -110,7 +111,92 @@ public class TestCases {
 		int Size = URL.length; System.out.print(Size +"  ---");
 		int randomIndesx = rand.nextInt(Size); System.out.println(randomIndesx);
 		driver.get(URL[randomIndesx]);
+	
 	}
+	@Test (priority= 8, enabled=false)
+	public void HotelTab() {
+		WebElement openTab= driver.findElement(By.id("uncontrolled-tab-example-tab-hotels"));
+		openTab.click();
+		
+		String [] EnglishCities= {"Dubai","Jaddah","Riyadh"};
+		int EnglishIndex= rand.nextInt(EnglishCities.length);
+		String [] ArabicCities= {"دبي","جدة"};
+		int ArabicIndex= rand.nextInt(ArabicCities.length);
+		
+		WebElement searchField= driver.findElement(By.xpath("//input[@data-testid='AutoCompleteInput']"));
+		//searchField.sendKeys("TEST");
+		WebElement checkLanguage = driver.findElement(By.cssSelector("html"));
+		String Lang= checkLanguage.getAttribute("lang");
+		//System.out.println(Lang);
+		if(Lang == "en") {
+			searchField.sendKeys(EnglishCities[EnglishIndex]);}
+		
+		else {searchField.sendKeys(ArabicCities[ArabicIndex]);}
+		
+	}
+	@Test (priority= 8)
+	public void HotelTab2() {
+		WebElement openTab= driver.findElement(By.id("uncontrolled-tab-example-tab-hotels"));
+		openTab.click();
+		String [] EnglishCities= {"Dubai","Jaddah","Riyadh"};
+		int EnglishIndex= rand.nextInt(EnglishCities.length);
+		System.out.println(EnglishIndex);
+		String [] ArabicCities= {"دبي","جدة"};
+		int ArabicIndex= rand.nextInt(ArabicCities.length);
+		System.out.println(ArabicIndex);
+		
+		WebElement searchField= driver.findElement(By.xpath("//input[@data-testid='AutoCompleteInput']"));
+		String URL=driver.getCurrentUrl();
+		if(URL.contains("ar")) {
+			searchField.sendKeys(ArabicCities[ArabicIndex]);}
+		
+		else {searchField.sendKeys(EnglishCities[EnglishIndex]);}
+		
+		
+		WebElement ListOfLocations=driver.findElement(By.cssSelector(".sc-phbroq-4.gGwzVo.AutoComplete__List"));
+		WebElement firstOption= ListOfLocations.findElements(By.tagName("Li")).get(1);
+		firstOption.click();
+		
+	}
+	@Test (priority= 9)
+	public void randomlySelectRoom() {
+		WebElement selector =driver.findElement(By.xpath("//select[@data-testid='HotelSearchBox__ReservationSelect_Select']"));
+		Select select =new Select(selector);
+		int randomIndex=rand.nextInt(2);
+		select.selectByIndex(randomIndex);
+		//select.selectByValue("B");
+		//select.selectByVisibleText("1 Room, 2 Adults, 0 Children");
+		
+		WebElement SearchButton= driver.findElement(By.xpath("//button[@data-testid='HotelSearchBox__SearchButton']"));
+		SearchButton.click();
+	}
+	@Test (priority= 10)
+	public void assertforSearching() throws InterruptedException {
+		Thread.sleep(20000);
+		//String ExpectedMessage ="properties found in";
+		WebElement getIndex = driver.findElement(By.xpath("//span[@data-testid='HotelSearchResult__resultsFoundCount']"));
+		String text =getIndex.getText();
+		System.out.println(getIndex.getText());
+		boolean assertion= text.contains("properties found in") ||text.contains("وجدنا");
+		
+		org.testng.Assert.assertEquals(assertion, true);
+		
+	}
+	@Test (priority= 11)
+	public void FromLowestToHighestPrice () {
+		WebElement clickLowestPrice = driver.findElement(By.xpath("//button[@data-testid='HotelSearchResult__sort__LOWEST_PRICE']"));
+		clickLowestPrice.click();
+		WebElement Container= driver.findElement(By.cssSelector(".sc-htpNat.KtFsv.col-9"));
+		List <WebElement> PricesField= Container.findElements(By.className("Price__Value"));
+				
+		String lowestPrice= PricesField.get(0).getText();
+		int lowest= Integer.parseInt(lowestPrice);
+		String HighestPrice= PricesField.get(PricesField.size()-1).getText();
+		int highest= Integer.parseInt(HighestPrice);
+		System.out.println(lowestPrice+"=================+"+HighestPrice);
+		org.testng.Assert.assertEquals(lowest<highest, true);
+	}
+	
 }
 	
 

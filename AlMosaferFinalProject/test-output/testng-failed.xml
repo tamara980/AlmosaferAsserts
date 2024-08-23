@@ -6,7 +6,8 @@
       <class name="homePage.TestCases">
         <methods>
           <include name="setup"/>
-          <include name="ChangeLanguage"/>
+          <include name="assertforSearching"/>
+          <include name="FromLowestToHighestPrice"/>
         </methods>
       </class> <!-- homePage.TestCases -->
     </classes>
